@@ -1,14 +1,16 @@
 const input = document.querySelector('#input');
 const ulList = document.querySelector('.list-group');
+const buttonAddon1 = document.querySelector('#button-addon1');
 
 let todoList = [];
+buttonAddon1.style.display = 'none';
 
 // done.addEventListener('click', (e) => {
 //   console.log(e.target);
 
 // })
 input.addEventListener('keydown', event => {
-  if ((event.key === 'Enter' || event.keyCode === 13) && input.value !== '') {
+  if ((event.key === 'Enter' || event.keyCode === 13) && input.value) {
     todoList.unshift({
       content: input.value,
       done: false,
@@ -41,7 +43,7 @@ function upgradeview() {
 
     checkboxElement.addEventListener('change', () => {
       todoitem.selected = checkboxElement.checked;
-
+      upgradeview();
     })
 
     const taskElement = document.createElement('span');
@@ -83,6 +85,14 @@ function upgradeview() {
       });
     }
 
+    const someSelected = todoList.some(todoItem => todoItem.selected)
+
+    if (someSelected) {
+      buttonAddon1.style.display = '';
+    } else {
+      buttonAddon1.style.display = 'none';
+    }
+
 
 
   }
@@ -116,6 +126,7 @@ document.querySelector('#restoreAction').addEventListener('click', () => {
 });
 document.querySelector('#removeAction').addEventListener('click', () => {
   todoList = todoList.filter(todoitem => !todoitem.selected)
+
   upgradeview();
 });
 
