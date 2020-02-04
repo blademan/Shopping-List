@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+html {
+  font-size: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+
+  font-size: 2rem;
+
+}
+
+.todoDone {
+  text-decoration: line-through;
+  font-style: italic;
+  color: gray;
+}
