@@ -2,32 +2,31 @@ const input = document.querySelector('#input');
 const ulList = document.querySelector('.list-group');
 const buttonAddon1 = document.querySelector('#button-addon1');
 
-let todoList = [];
+let todoList = JSON.parse(localStorage.getItem('lsKey'));
 buttonAddon1.style.display = 'none';
 
-// done.addEventListener('click', (e) => {
-//   console.log(e.target);
 
-// })
 input.addEventListener('keydown', event => {
   if ((event.key === 'Enter' || event.keyCode === 13) && input.value) {
+
     todoList.unshift({
       content: input.value,
       done: false,
       selected: false
     })
     input.value = '';
+
     upgradeview();
   }
 })
 
-
 function upgradeview() {
+  storeTask(todoList);
+  fetchTask()
+
   ulList.innerHTML = '';
   for (let index = 0; index < todoList.length; index++) {
     const todoitem = todoList[index];
-
-
 
 
     const liElement = document.createElement('li');
@@ -67,6 +66,7 @@ function upgradeview() {
 
       btnDoneElement.addEventListener('click', () => {
         todoitem.done = !todoitem.done;
+
         upgradeview();
 
       })
@@ -81,6 +81,7 @@ function upgradeview() {
 
       btnRemoveElement.addEventListener('click', () => {
         todoList = todoList.filter(todoitem => !todoitem.selected)
+        fetchTask()
         upgradeview();
       });
     }
@@ -92,9 +93,6 @@ function upgradeview() {
     } else {
       buttonAddon1.style.display = 'none';
     }
-
-
-
   }
 }
 
@@ -107,10 +105,9 @@ document.querySelector('#doneAction').addEventListener('click', () => {
       key.selected = false;
 
     }
+
     upgradeview();
   }
-
-
 });
 
 
@@ -131,8 +128,26 @@ document.querySelector('#removeAction').addEventListener('click', () => {
 });
 
 document.querySelector('#allAction').addEventListener('click', () => {
+
   for (const key of todoList) {
     key.selected = true;
   }
+
   upgradeview();
 })
+
+
+function storeTask(myTask) {
+  localStorage.setItem('lsKey', JSON.stringify(myTask));
+
+}
+
+
+function fetchTask() {
+
+  let todoList = JSON.parse(localStorage.getItem('lsKey'));
+
+  console.log("fetch");
+
+  return todoList;
+}
