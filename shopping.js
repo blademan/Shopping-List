@@ -2,7 +2,8 @@ const input = document.querySelector('#input');
 const ulList = document.querySelector('.list-group');
 const buttonAddon1 = document.querySelector('#button-addon1');
 
-let todoList = JSON.parse(localStorage.getItem('lsKey'));
+let todoList = [];
+todoList = JSON.parse(localStorage.getItem('lsKey'));
 buttonAddon1.style.display = 'none';
 
 
@@ -14,6 +15,7 @@ input.addEventListener('keydown', event => {
       done: false,
       selected: false
     })
+
     input.value = '';
 
     upgradeview();
@@ -144,10 +146,13 @@ function storeTask(myTask) {
 
 
 function fetchTask() {
-
-  let todoList = JSON.parse(localStorage.getItem('lsKey'));
+  console.log(1)
 
   console.log("fetch");
+  let todoList = JSON.parse(localStorage.getItem('lsKey'));
+
 
   return todoList;
+
+
 }
