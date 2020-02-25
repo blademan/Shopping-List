@@ -2,12 +2,10 @@ const input = document.querySelector('#input');
 const ulList = document.querySelector('.list-group');
 const buttonAddon1 = document.querySelector('#button-addon1');
 
-function init() {
-  let todoList = [];
+let todoList = [];
 
-  if (todoList != null) {
-    todoList = JSON.parse(localStorage.getItem('lsKey'));
-  }
+function init() {
+
   buttonAddon1.style.display = 'none';
 
 
@@ -15,6 +13,7 @@ function init() {
 
 
     if ((event.key === 'Enter' || event.keyCode === 13) && input.value) {
+
 
       todoList.unshift({
         content: input.value,
@@ -37,6 +36,7 @@ function init() {
 
     ulList.innerHTML = '';
 
+    console.log(todoList);
 
 
     for (let index = 0; index < todoList.length; index++) {
@@ -173,4 +173,5 @@ function init() {
   }
   upgradeview();
 }
+todoList = JSON.parse(localStorage.getItem('lsKey'));
 init();
