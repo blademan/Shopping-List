@@ -3,11 +3,16 @@ const ulList = document.querySelector('.list-group');
 const buttonAddon1 = document.querySelector('#button-addon1');
 
 let todoList = [];
-todoList = JSON.parse(localStorage.getItem('lsKey'));
+
+if (todoList != null) {
+  todoList = JSON.parse(localStorage.getItem('lsKey'));
+}
 buttonAddon1.style.display = 'none';
 
 
 input.addEventListener('keydown', event => {
+
+
   if ((event.key === 'Enter' || event.keyCode === 13) && input.value) {
 
     todoList.unshift({
@@ -23,11 +28,19 @@ input.addEventListener('keydown', event => {
 })
 
 function upgradeview() {
+
+
   storeTask(todoList);
+
   fetchTask()
 
   ulList.innerHTML = '';
+
+
+
   for (let index = 0; index < todoList.length; index++) {
+
+
     const todoitem = todoList[index];
 
 
@@ -96,12 +109,13 @@ function upgradeview() {
       buttonAddon1.style.display = 'none';
     }
   }
+
 }
 
 document.querySelector('#doneAction').addEventListener('click', () => {
 
   for (const key of todoList) {
-    console.log(key);
+
     if (key.selected) {
       key.done = true;
       key.selected = false;
@@ -142,17 +156,17 @@ document.querySelector('#allAction').addEventListener('click', () => {
 function storeTask(myTask) {
   localStorage.setItem('lsKey', JSON.stringify(myTask));
 
+
 }
 
 
+
+
+
 function fetchTask() {
-  console.log(1)
 
-  console.log("fetch");
-  let todoList = JSON.parse(localStorage.getItem('lsKey'));
+  let todoListFetch = JSON.parse(localStorage.getItem('lsKey'));
 
-
-  return todoList;
-
+  return todoListFetch;
 
 }
